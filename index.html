@@ -24,12 +24,12 @@
     </div>
     <div class="header-stats">
       <div class="stat-pill">
-
-        
+        <span class="stat-num" id="days-left">—</span>
+        <span class="stat-lbl">days left</span>
       </div>
       <div class="stat-pill">
-        <span class="stat-num">~130</span>
-        <span class="stat-lbl">study hours</span>
+        <span class="stat-num" id="overall-pct">0%</span>
+        <span class="stat-lbl">complete</span>
       </div>
       <div class="stat-pill exam-pill">
         <span class="stat-num">Aug 23</span>
@@ -39,27 +39,45 @@
   </div>
 </header>
 
-<nav class="subject-nav">
-  <button class="nav-btn active" data-filter="all">All subjects</button>
-  <button class="nav-btn" data-filter="FA" data-color="fa">
-    <span class="nav-dot"></span>Financial Accounting
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="timetable">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Timetable
   </button>
-  <button class="nav-btn" data-filter="ECON" data-color="econ">
-    <span class="nav-dot"></span>Economics
+  <button class="tab-btn" data-tab="checklist">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    Checklist
   </button>
-  <button class="nav-btn" data-filter="LAW" data-color="law">
-    <span class="nav-dot"></span>Intro to Law
-  </button>
-  <button class="nav-btn" data-filter="QA" data-color="qa">
-    <span class="nav-dot"></span>Quant. Analysis
-  </button>
-</nav>
+  <!-- subject filter — only visible on timetable tab -->
+  <div class="tab-spacer"></div>
+  <div class="subject-filters" id="subject-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="FA"><span class="fdot fa-dot"></span>FA</button>
+    <button class="filter-btn" data-filter="ECON"><span class="fdot econ-dot"></span>Econ</button>
+    <button class="filter-btn" data-filter="LAW"><span class="fdot law-dot"></span>Law</button>
+    <button class="filter-btn" data-filter="QA"><span class="fdot qa-dot"></span>QA</button>
+  </div>
+</div>
 
-<main>
+<!-- TIMETABLE TAB -->
+<main id="tab-timetable" class="tab-content active">
   <div class="syllabus-grid" id="syllabus-grid"></div>
   <div class="timetable-wrap" id="timetable"></div>
 </main>
 
+<!-- CHECKLIST TAB -->
+<main id="tab-checklist" class="tab-content checklist-main">
+  <div class="checklist-subject-tabs" id="checklist-subject-tabs">
+    <button class="cl-tab active" data-subject="FA">Financial Accounting</button>
+    <button class="cl-tab" data-subject="ECON">Economics</button>
+    <button class="cl-tab" data-subject="LAW">Intro to Law</button>
+    <button class="cl-tab" data-subject="QA">Quant. Analysis</button>
+  </div>
+  <div id="checklist-content"></div>
+</main>
+
+<!-- Modal -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal" id="modal">
     <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
@@ -68,8 +86,12 @@
     <p class="modal-date" id="modal-date"></p>
     <div class="modal-topic-block" id="modal-topic-block"></div>
     <div class="modal-prev-block" id="modal-prev-block"></div>
+    <button class="modal-done-btn" id="modal-done-btn">Mark session as done</button>
   </div>
 </div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
 <script src="data.js"></script>
 <script src="app.js"></script>
