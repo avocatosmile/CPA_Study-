@@ -32,7 +32,7 @@ function subtopicKey(subject, heading, idx) { return `${subject}||${heading}||${
 // COUNTDOWN
 // ═══════════════════════════════════════════════════════════
 function updateCountdown() {
-  const exam = new Date('2025-08-23');
+  const exam = new Date('2026-08-23');
   const diff = Math.max(0, Math.ceil((exam - new Date()) / 86400000));
   const el = document.getElementById('days-left');
   if (el) el.textContent = diff;
@@ -140,8 +140,22 @@ function getTopicData(day) {
   return arr[Math.min(day.t, arr.length - 1)];
 }
 
+// Map calendar dates to schedule positions for "today" marker
+// Week 1 starts Mon Jul 20, 2026
+const SCHEDULE_START = new Date('2026-07-20');
+function getDayIndex() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const start = new Date(SCHEDULE_START);
+  start.setHours(0,0,0,0);
+  return Math.floor((today - start) / 86400000);
+}
+
 function buildTimetable() {
   const container = document.getElementById('timetable');
+  const todayOffset = getDayIndex(); // days since schedule start
+  let cellCounter = 0;
+
   SCHEDULE.forEach((phase, pi) => {
     const section = document.createElement('div');
     section.className = 'phase-section';
@@ -152,8 +166,13 @@ function buildTimetable() {
     section.appendChild(heading);
 
     phase.weeks.forEach((week, wi) => {
+      // Auto-open the week that contains today, otherwise open week 1
+      const weekStart = cellCounter;
+      const weekEnd = weekStart + week.days.length - 1;
+      const containsToday = todayOffset >= weekStart && todayOffset <= weekEnd;
+      const isFirstWeek = pi === 0 && wi === 0;
       const block = document.createElement('div');
-      block.className = 'week-block' + (pi === 0 && wi === 0 ? ' open' : '');
+      block.className = 'week-block' + ((containsToday || (todayOffset < 0 && isFirstWeek)) ? ' open' : '');
 
       const subjects = [...new Set(week.days.filter(d => d.s !== 'REST').map(d => d.sub || d.s))];
       const COLORS = { FA:'#c8a96e', ECON:'#7cb87a', LAW:'#7facd6', QA:'#c97a6e', REV:'#a07ec8', MOCK:'#d67aaa', EXAM:'#e05555' };
@@ -170,12 +189,19 @@ function buildTimetable() {
       const grid = document.createElement('div');
       grid.className = 'day-grid';
 
+      // Track which week this is by counting cells so far
+      const weekStartOffset = cellCounter;
+
       week.days.forEach((day, di) => {
+        const globalDayOffset = weekStartOffset + di;
+        const isToday = globalDayOffset === todayOffset;
+        cellCounter++;
+
         const skey = sessionKey(pi, wi, di);
         const isDone = doneSessions.has(skey);
         const cls = CELL_CLS[day.s] || 'day-rest';
         const cell = document.createElement('div');
-        cell.className = `day-cell ${cls}${isDone ? ' day-done' : ''}`;
+        cell.className = `day-cell ${cls}${isDone ? ' day-done' : ''}${isToday ? ' day-today' : ''}`;
         cell.dataset.subject = day.sub || day.s;
         cell.dataset.skey = skey;
 
@@ -184,8 +210,8 @@ function buildTimetable() {
         const isStudyDay = topicData && day.s !== 'REST' && day.s !== 'EXAM';
 
         cell.innerHTML = `
-          <span class="day-name">${DAYS[di]}</span>
-          <span class="day-badge">${LABELS[day.s]||day.s}</span>
+          <span class="day-name">${DAYS[di]}${isToday ? ' <span class="today-pip"></span>' : ''}</span>
+          <span class="day-badge">${isToday ? '📍 Today' : (LABELS[day.s]||day.s)}</span>
           ${shortTopic ? `<span class="day-topic-short">${shortTopic}</span>` : ''}
           ${day.h ? `<span class="day-hrs">${day.h}</span>` : ''}
           ${isStudyDay ? `<button class="cell-done-btn" title="${isDone ? 'Mark undone' : 'Mark done'}">${isDone ? '✓ Done' : '+ Done'}</button>` : ''}

@@ -228,6 +228,21 @@ header {
 .day-rest:hover { transform: none; }
 .day-cell.filtered-out { opacity: 0.12; pointer-events: none; }
 
+/* Today marker */
+.day-cell.day-today {
+  box-shadow: 0 0 0 2px var(--text2);
+  z-index: 1;
+}
+.day-cell.day-today .day-badge {
+  background: var(--text) !important;
+  color: var(--bg) !important;
+  font-size: 9px !important;
+}
+.today-pip {
+  display: inline-block; width: 5px; height: 5px;
+  background: var(--green); border-radius: 50; margin-left: 2px; vertical-align: middle;
+}
+
 /* Done state */
 .day-cell.day-done {
   border-color: var(--green-border) !important;

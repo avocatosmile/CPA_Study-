@@ -72,83 +72,87 @@ const SYLLABUS = {
 };
 
 const SUBJECTS_META = {
-  FA: { label: "Financial Accounting", paper: "P1", days: 18, desc: "Accounting process, financial statements, IFRSs, ratio analysis, public sector" },
-  ECON: { label: "Economics", paper: "P4", days: 14, desc: "Micro & macroeconomics, national income, monetary policy, international trade" },
-  LAW: { label: "Introduction to Law", paper: "P3", days: 14, desc: "Legal system, contract law, tort, agency, corporate governance, ethics" },
-  QA: { label: "Quantitative Analysis", paper: "P5", days: 16, desc: "Calculus, statistics, probability, regression, LP, decision theory" },
+  FA: { label: "Financial Accounting", paper: "P1", days: 6, desc: "Accounting process, financial statements, IFRSs, ratio analysis, public sector" },
+  ECON: { label: "Economics", paper: "P4", days: 5, desc: "Micro & macroeconomics, national income, monetary policy, international trade" },
+  LAW: { label: "Introduction to Law", paper: "P3", days: 5, desc: "Legal system, contract law, tort, agency, corporate governance, ethics" },
+  QA: { label: "Quantitative Analysis", paper: "P5", days: 6, desc: "Calculus, statistics, probability, regression, LP, decision theory" },
 };
+
+// ── COMPRESSED SCHEDULE: Jul 20 – Aug 19, 2026 (exam Aug 23–24) ──
+// 30 days · 4 Sundays off · 27 study days
+// Phase 1 (Jul 20–Aug 1): First pass all subjects
+// Phase 2 (Aug 3–15): Deep dive + past papers + mocks
+// Final (Aug 17–19): Light revision before exam
 
 const SCHEDULE = [
   {
     phase: "Phase 1",
-    title: "Foundation",
-    dates: "Jun 2 – Jun 29",
+    title: "First Pass",
+    dates: "Jul 20 – Aug 1",
     weeks: [
-      { title: "Week 1", dates: "Jun 2 – 8", days: [
-        { s:"FA", t:0, h:"1.5h" },{ s:"FA", t:1, h:"1.5h" },{ s:"FA", t:2, h:"1.5h" },{ s:"FA", t:3, h:"1.5h" },{ s:"FA", t:4, h:"1.5h" },
-        { s:"FA", t:5, h:"4h" },{ s:"REST", t:-1, h:"" }
+      // Week 1: Mon Jul 20 – Sun Jul 26
+      { title: "Week 1", dates: "Jul 20 – 26", days: [
+        { s:"FA",   t:0,  h:"1.5h" },  // Mon Jul 20 — Intro to accounting
+        { s:"FA",   t:1,  h:"1.5h" },  // Tue Jul 21 — Accounting process
+        { s:"ECON", t:0,  h:"1.5h" },  // Wed Jul 22 — Intro to economics
+        { s:"ECON", t:1,  h:"1.5h" },  // Thu Jul 23 — Demand analysis
+        { s:"LAW",  t:0,  h:"1.5h" },  // Fri Jul 24 — Nature of law
+        { s:"QA",   t:0,  h:"4h"   },  // Sat Jul 25 — Mathematical functions
+        { s:"REST", t:-1, h:""     },  // Sun Jul 26
       ]},
-      { title: "Week 2", dates: "Jun 9 – 15", days: [
-        { s:"FA", t:6, h:"1.5h" },{ s:"FA", t:7, h:"1.5h" },{ s:"FA", t:8, h:"1.5h" },
-        { s:"ECON", t:0, h:"1.5h" },{ s:"ECON", t:1, h:"1.5h" },{ s:"ECON", t:2, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 3", dates: "Jun 16 – 22", days: [
-        { s:"ECON", t:3, h:"1.5h" },{ s:"ECON", t:4, h:"1.5h" },
-        { s:"LAW", t:0, h:"1.5h" },{ s:"LAW", t:1, h:"1.5h" },{ s:"LAW", t:2, h:"1.5h" },{ s:"LAW", t:3, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 4", dates: "Jun 23 – 29", days: [
-        { s:"LAW", t:4, h:"1.5h" },{ s:"LAW", t:5, h:"1.5h" },
-        { s:"QA", t:0, h:"1.5h" },{ s:"QA", t:1, h:"1.5h" },{ s:"QA", t:2, h:"1.5h" },{ s:"QA", t:3, h:"4h" },{ s:"REST", t:-1, h:"" }
+      // Week 2: Mon Jul 27 – Sun Aug 2
+      { title: "Week 2", dates: "Jul 27 – Aug 2", days: [
+        { s:"LAW",  t:1,  h:"1.5h" },  // Mon Jul 27 — Admin law & courts
+        { s:"QA",   t:1,  h:"1.5h" },  // Tue Jul 28 — Matrix algebra
+        { s:"QA",   t:2,  h:"1.5h" },  // Wed Jul 29 — Differentiation
+        { s:"FA",   t:2,  h:"1.5h" },  // Thu Jul 30 — Regulation & principles
+        { s:"FA",   t:3,  h:"1.5h" },  // Fri Jul 31 — Assets & liabilities I
+        { s:"ECON", t:2,  h:"4h"   },  // Sat Aug 1  — Supply, equilibrium
+        { s:"REST", t:-1, h:""     },  // Sun Aug 2
       ]},
     ]
   },
   {
     phase: "Phase 2",
-    title: "Deep Dive",
-    dates: "Jun 30 – Jul 27",
+    title: "Deep Dive & Mocks",
+    dates: "Aug 3 – Aug 15",
     weeks: [
-      { title: "Week 5", dates: "Jun 30 – Jul 6", days: [
-        { s:"QA", t:4, h:"1.5h" },{ s:"QA", t:5, h:"1.5h" },
-        { s:"FA", t:9, h:"1.5h" },{ s:"FA", t:10, h:"1.5h" },{ s:"FA", t:11, h:"1.5h" },{ s:"FA", t:12, h:"4h" },{ s:"REST", t:-1, h:"" }
+      // Week 3: Mon Aug 3 – Sun Aug 9
+      { title: "Week 3", dates: "Aug 3 – 9", days: [
+        { s:"QA",   t:3,  h:"1.5h" },  // Mon Aug 3  — Integration
+        { s:"QA",   t:4,  h:"1.5h" },  // Tue Aug 4  — Descriptive stats
+        { s:"FA",   t:4,  h:"1.5h" },  // Wed Aug 5  — Assets & liabilities II
+        { s:"FA",   t:5,  h:"1.5h" },  // Thu Aug 6  — Sole trader FS
+        { s:"ECON", t:3,  h:"1.5h" },  // Fri Aug 7  — Consumer behaviour
+        { s:"LAW",  t:2,  h:"4h"   },  // Sat Aug 8  — ADR & courts deep dive
+        { s:"REST", t:-1, h:""     },  // Sun Aug 9
       ]},
-      { title: "Week 6", dates: "Jul 7 – 13", days: [
-        { s:"FA", t:13, h:"1.5h" },{ s:"FA", t:14, h:"1.5h" },{ s:"FA", t:15, h:"1.5h" },
-        { s:"ECON", t:5, h:"1.5h" },{ s:"ECON", t:6, h:"1.5h" },{ s:"ECON", t:7, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 7", dates: "Jul 14 – 20", days: [
-        { s:"ECON", t:8, h:"1.5h" },{ s:"ECON", t:9, h:"1.5h" },{ s:"ECON", t:10, h:"1.5h" },
-        { s:"LAW", t:6, h:"1.5h" },{ s:"QA", t:6, h:"1.5h" },{ s:"QA", t:7, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 8", dates: "Jul 21 – 27", days: [
-        { s:"QA", t:8, h:"1.5h" },{ s:"QA", t:9, h:"1.5h" },{ s:"QA", t:10, h:"1.5h" },
-        { s:"LAW", t:7, h:"1.5h" },{ s:"LAW", t:8, h:"1.5h" },{ s:"FA", t:16, h:"4h" },{ s:"REST", t:-1, h:"" }
+      // Week 4: Mon Aug 10 – Sun Aug 16
+      { title: "Week 4", dates: "Aug 10 – 16", days: [
+        { s:"REV",  sub:"FA",   t:6,  h:"1.5h" },  // Mon Aug 10 — Rev: FA hard topics
+        { s:"REV",  sub:"QA",   t:5,  h:"1.5h" },  // Tue Aug 11 — Rev: Probability
+        { s:"REV",  sub:"ECON", t:4,  h:"1.5h" },  // Wed Aug 12 — Rev: Theory of firm
+        { s:"REV",  sub:"LAW",  t:3,  h:"1.5h" },  // Thu Aug 13 — Rev: Contract law
+        { s:"MOCK", sub:"FA",   t:-2, h:"1.5h" },  // Fri Aug 14 — Mock: FA
+        { s:"MOCK", sub:"QA",   t:-2, h:"4h"   },  // Sat Aug 15 — Mock: QA
+        { s:"REST", t:-1, h:""     },  // Sun Aug 16
       ]},
     ]
   },
   {
     phase: "Phase 3",
-    title: "Revision & Mocks",
-    dates: "Jul 28 – Aug 22",
+    title: "Final Revision",
+    dates: "Aug 17 – 19",
     weeks: [
-      { title: "Week 9", dates: "Jul 28 – Aug 3", days: [
-        { s:"REV", sub:"FA", t:17, h:"1.5h" },{ s:"REV", sub:"FA", t:17, h:"1.5h" },
-        { s:"REV", sub:"ECON", t:11, h:"1.5h" },{ s:"REV", sub:"ECON", t:12, h:"1.5h" },
-        { s:"REV", sub:"LAW", t:9, h:"1.5h" },{ s:"MOCK", sub:"FA", t:-2, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 10", dates: "Aug 4 – 10", days: [
-        { s:"REV", sub:"LAW", t:10, h:"1.5h" },{ s:"REV", sub:"QA", t:11, h:"1.5h" },
-        { s:"REV", sub:"QA", t:12, h:"1.5h" },{ s:"REV", sub:"QA", t:13, h:"1.5h" },
-        { s:"REV", sub:"ECON", t:13, h:"1.5h" },{ s:"MOCK", sub:"QA", t:-2, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 11", dates: "Aug 11 – 17", days: [
-        { s:"REV", sub:"FA", t:17, h:"1.5h" },{ s:"REV", sub:"QA", t:14, h:"1.5h" },
-        { s:"REV", sub:"ECON", t:13, h:"1.5h" },{ s:"REV", sub:"LAW", t:11, h:"1.5h" },
-        { s:"MOCK", sub:"LAW", t:-2, h:"1.5h" },{ s:"MOCK", sub:"ECON", t:-2, h:"4h" },{ s:"REST", t:-1, h:"" }
-      ]},
-      { title: "Week 12", dates: "Aug 18 – 24", days: [
-        { s:"REV", sub:"FA", t:17, h:"1h" },{ s:"REV", sub:"QA", t:15, h:"1h" },
-        { s:"REV", sub:"LAW", t:12, h:"1h" },{ s:"REV", sub:"ECON", t:13, h:"1h" },
-        { s:"REST", t:-1, h:"" },{ s:"EXAM", t:-3, h:"Day 1" },{ s:"EXAM", t:-3, h:"Day 2" }
+      // Week 5 partial: Mon Aug 17 – Wed Aug 19
+      { title: "Final Days", dates: "Aug 17 – 19", days: [
+        { s:"REV",  sub:"FA",   t:7,  h:"1.5h" },  // Mon Aug 17 — FA final drill
+        { s:"REV",  sub:"ECON", t:4,  h:"1.5h" },  // Tue Aug 18 — Econ + Law key topics
+        { s:"REST", t:-1, h:""     },  // Wed Aug 19 — Rest before exam week
+        { s:"REST", t:-1, h:""     },  // Thu (placeholder — exam prep)
+        { s:"REST", t:-1, h:""     },  // Fri (placeholder)
+        { s:"REST", t:-1, h:""     },  // Sat (placeholder)
+        { s:"REST", t:-1, h:""     },  // Sun (placeholder)
       ]},
     ]
   }
